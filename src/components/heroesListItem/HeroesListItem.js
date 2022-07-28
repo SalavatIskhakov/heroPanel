@@ -1,6 +1,8 @@
+import { deleteHeroById } from '../../actions';
+import { useDispatch } from 'react-redux';
 
-const HeroesListItem = ({name, description, element}) => {
-
+const HeroesListItem = ({ id, name, description, element }) => {
+    const dispatch = useDispatch();
     let elementClassName;
 
     switch (element) {
@@ -21,19 +23,19 @@ const HeroesListItem = ({name, description, element}) => {
     }
 
     return (
-        <li 
+        <li
             className={`card flex-row mb-4 shadow-lg text-white ${elementClassName}`}>
-            <img src="http://www.stpaulsteinbach.org/wp-content/uploads/2014/09/unknown-hero.jpg" 
-                 className="img-fluid w-25 d-inline" 
-                 alt="unknown hero" 
-                 style={{'objectFit': 'cover'}}/>
+            <img src="http://www.stpaulsteinbach.org/wp-content/uploads/2014/09/unknown-hero.jpg"
+                className="img-fluid w-25 d-inline"
+                alt="unknown hero"
+                style={{ 'objectFit': 'cover' }} />
             <div className="card-body">
-                
+
                 <h3 className="card-title">{name}</h3>
                 <p className="card-text">{description}</p>
             </div>
             <span className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">
-                <button type="button" className="btn-close btn-close" aria-label="Close"></button>
+                <button onClick={() => dispatch(deleteHeroById(id))} type="button" className="btn-close btn-close" aria-label="Close"></button>
             </span>
         </li>
     )

@@ -37,9 +37,17 @@ const HeroesList = () => {
         }
 
         return arr.map(({id, ...props}) => {
-            return <HeroesListItem key={id} {...props}/>
+            return <HeroesListItem key={id} id={id} {...props}/>
         })
     }
+
+    // const deleteHero = (id) => {
+    //     return renderHeroesList(
+    //         heroes.filter((hero) => {
+    //             return hero.id !== id;
+    //         })
+    //     )
+    // }
 
     const elements = renderHeroesList(heroes);
     return (
