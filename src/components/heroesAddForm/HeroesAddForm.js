@@ -36,6 +36,11 @@ const HeroesAddForm = () => {
                 description,
                 element
             }
+
+            setName('');
+            setDescription('');
+            setElement('');
+
             dispatch(addHero([
                 ...heroes,
                 hero
@@ -81,6 +86,7 @@ const HeroesAddForm = () => {
                     className="form-selectx"
                     id="element"
                     name="element"
+                    value={element}
                     onChange={(e) => setElement(e.target.value)}
                 >
                     <option >Я владею элементом...</option>
