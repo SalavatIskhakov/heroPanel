@@ -27,7 +27,8 @@ const HeroesAddForm = () => {
 
     const dispatch = useDispatch();
 
-    const createHero = () => {
+    const createHero = (e) => {
+        e.preventDefault();
         if (name.length && description.length && element) {
             const hero = {
                 id: uuidv4(),
