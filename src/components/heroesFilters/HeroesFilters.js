@@ -22,11 +22,10 @@ const HeroesFilters = () => {
         dispatch(filtersFetching());
         request("http://localhost:3001/filters")
             .then(data => dispatch(filtersFetched(data)))
-            .catch(() => dispatch(filtersFetchingError()))
+            .catch(() => dispatch(filtersFetchingError()))        
 
         // eslint-disable-next-line
     }, []);
-
 
     if (filtersLoadingStatus === "loading") {
         return <Spinner />;

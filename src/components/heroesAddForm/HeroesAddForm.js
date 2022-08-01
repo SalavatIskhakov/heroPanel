@@ -15,14 +15,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { addHero } from '../../actions';
 import { useHttp } from '../../hooks/http.hook';
 
-
-
 const HeroesAddForm = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [element, setElement] = useState('');
 
-    const { heroes } = useSelector(state => state);
+    const { heroes, filters, filtersLoadingStatus } = useSelector(state => state);
     const { request } = useHttp();
 
     const dispatch = useDispatch();
@@ -37,7 +35,6 @@ const HeroesAddForm = () => {
                 element
             }
 
-
             request(`http://localhost:3001/heroes`, 'POST', JSON.stringify(hero))
                 .then(
                     dispatch(addHero([
@@ -45,10 +42,30 @@ const HeroesAddForm = () => {
                         hero
                     ])),
                 )
+                .catch((err) => console.log(err))
 
             setName('');
             setDescription('');
             setElement('');
+        }
+    }
+
+    const renderFilters = (filters, status) => {
+        if (status === "loading") {
+            return <option>Загрузка элементов</option>
+        } else if (status === "error") {
+            return <option>Ошибка загрузки</option>
+        }
+
+        // Если фильтры есть, то рендерим их
+        if (filters && filters.length > 0) {
+            return filters.map(({ name, label }) => {
+                // Один из фильтров нам тут не нужен
+                // eslint-disable-next-line
+                if (name === 'all') return;
+
+                return <option key={name} value={name}>{label}</option>
+            })
         }
     }
 
@@ -93,10 +110,7 @@ const HeroesAddForm = () => {
                     onChange={(e) => setElement(e.target.value)}
                 >
                     <option >Я владею элементом...</option>
-                    <option value="fire">Огонь</option>
-                    <option value="water">Вода</option>
-                    <option value="wind">Ветер</option>
-                    <option value="earth">Земля</option>
+                    {renderFilters(filters, filtersLoadingStatus)}
                 </select>
             </div>
 
