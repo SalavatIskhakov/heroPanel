@@ -37,15 +37,18 @@ const HeroesAddForm = () => {
                 element
             }
 
+
+            request(`http://localhost:3001/heroes`, 'POST', JSON.stringify(hero))
+                .then(
+                    dispatch(addHero([
+                        ...heroes,
+                        hero
+                    ])),
+                )
+
             setName('');
             setDescription('');
             setElement('');
-
-            dispatch(addHero([
-                ...heroes,
-                hero
-            ]));
-            request(`http://localhost:3001/heroes`, 'POST', JSON.stringify(hero));
         }
     }
 
