@@ -19,7 +19,6 @@ const HeroesListItem = ({ name, description, element, deleteHero }) => {
             elementClassName = 'bg-warning bg-gradient';
     }
 
-    console.log(1)
     return (
         <li
             className={`card flex-row mb-4 shadow-lg text-white ${elementClassName}`}>
