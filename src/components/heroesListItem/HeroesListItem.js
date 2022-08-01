@@ -1,10 +1,5 @@
-import { deleteHeroById } from '../../actions';
-import { useDispatch } from 'react-redux';
-import { useHttp } from '../../hooks/http.hook';
 
-const HeroesListItem = ({ id, name, description, element }) => {
-    const dispatch = useDispatch();
-    const { request } = useHttp();
+const HeroesListItem = ({ name, description, element, deleteHero }) => {
     let elementClassName;
 
     switch (element) {
@@ -24,12 +19,7 @@ const HeroesListItem = ({ id, name, description, element }) => {
             elementClassName = 'bg-warning bg-gradient';
     }
 
-    const deleteHero = (e) => {
-        e.preventDefault();
-        dispatch(deleteHeroById(id));
-        request(`http://localhost:3001/heroes/${id}`, 'DELETE');
-    }
-
+    console.log(1)
     return (
         <li
             className={`card flex-row mb-4 shadow-lg text-white ${elementClassName}`}>
