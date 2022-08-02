@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import { addHero } from '../../actions';
+import { addHero } from '../heroesList/heroesSlice';
 import { useHttp } from '../../hooks/http.hook';
 
 const HeroesAddForm = () => {
@@ -38,10 +38,7 @@ const HeroesAddForm = () => {
 
             request(`http://localhost:3001/heroes`, 'POST', JSON.stringify(hero))
                 .then(
-                    dispatch(addHero([
-                        ...heroes,
-                        hero
-                    ])),
+                    dispatch(addHero(hero)),
                 )
                 .catch((err) => console.log(err))
 
